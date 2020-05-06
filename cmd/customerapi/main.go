@@ -1,11 +1,12 @@
 package main
+
 // Main or entry point for our application
 import (
 	"log"
-	
-	"net/http"	
 
-	"go-customer-ms/pkg/server"// confuguranto gorilla mux
+	"net/http"
+
+	"go-customer-ms/pkg/server" // confuguranto gorilla mux
 )
 
 /*

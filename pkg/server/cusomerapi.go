@@ -1,6 +1,10 @@
 package server
 
 import (
+	"go-customer-ms/pkg/model"
+
+	"encoding/json"
+
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -31,20 +35,19 @@ func (a *api) Router() http.Handler {
 	return a.router
 }
 
-type Customers []Customer
+type Customers []Customers
 
 func (a *api) fetchAllCustomers(w http.ResponseWriter, r *http.Request) {
 	/*
-	customers, _ := a.repository.FetchGophers()
+		customers, _ := a.repository.FetchGophers()
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(customers)*/
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(customers)*/
 	customers := Customers{
-		Customer{ID:"c123",Name:"Juli",Age:32}
+		model.Customer{ID: "c123", Name: "Juli", Age: 32},
 	}
 	json.NewEncoder(w).Encode(customers)
 }
-
 
 func (a *api) fetchCustomer(w http.ResponseWriter, r *http.Request) {
 	/*vars := mux.Vars(r)
@@ -56,5 +59,5 @@ func (a *api) fetchCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}*/
 
-	json.NewEncoder(w).Encode("hi cust")
+	json.NewEncoder(w).Encode(Customer{ID: "c111523", Name: "Juliano", Age: 32})
 }
