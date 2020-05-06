@@ -1,9 +1,8 @@
 package server
 
 import (
-	"go-customer-ms/pkg/model"
-
 	"encoding/json"
+	"go-customer-ms/pkg/model"
 
 	"net/http"
 
@@ -14,10 +13,12 @@ type api struct {
 	router http.Handler
 }
 
+// Server ...
 type Server interface {
 	Router() http.Handler
 }
 
+// New ...
 func New() Server {
 	a := &api{}
 
@@ -26,7 +27,7 @@ func New() Server {
 	r.HandleFunc("/customers", a.fetchAllCustomers).Methods(http.MethodGet)
 	// Note como Gorilla mux permite colocar expresione regulares para establecer reglas en los parámetros que
 	// se pasen
-	r.HandleFunc("/customer/{ID:[a-zA-Z0-9_]+}", a.fetchCustomer).Methods(http.MethodGet)
+	r.HandleFunc("/customers/{ID:[a-zA-Z0-9_]+}", a.fetchCustomer).Methods(http.MethodGet)
 	a.router = r
 	return a
 }
@@ -35,7 +36,8 @@ func (a *api) Router() http.Handler {
 	return a.router
 }
 
-type Customers []Customers
+// Customers ...
+type Customers []model.Customer
 
 func (a *api) fetchAllCustomers(w http.ResponseWriter, r *http.Request) {
 	/*
@@ -59,5 +61,5 @@ func (a *api) fetchCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}*/
 
-	json.NewEncoder(w).Encode(Customer{ID: "c111523", Name: "Juliano", Age: 32})
+	json.NewEncoder(w).Encode(model.Customer{ID: "c111523", Name: "Juliano", Age: 32})
 }
